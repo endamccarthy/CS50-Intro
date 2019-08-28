@@ -1,0 +1,100 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Portfolio
+{% endblock %}
+
+{% block main %}
+    <table class="table table-striped">
+        <col width="100">
+        <col width="130">
+        <col width="100">
+        <col width="110">
+        <col width="130">
+        <col width="120">
+        <thead>
+            <tr>
+                <th>Symbol</th>
+                <th>Name</th>
+                <th>Shares</th>
+                <th>Price</th>
+                <th>TOTAL</th>
+                <th>Buy/Sell Shares</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <td colspan="4"></td>
+                <td colspan="2"><b>{{ grandTotal }}</b></td>
+            </tr>
+        </tfoot>
+        <tbody>
+            {% for row in rows %}
+                <tr>
+                    <td>{{ row['symbol'] }}</td>
+                    <td>{{ row['name'] }}</td>
+                    <td>{{ row['SUM(quantity)'] }}</td>
+                    <td>{{ row['price'] }}</td>
+                    <td>{{ row['total'] }}</td>
+                    <td>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <button class="btn btn-primary" name="buy" onclick="buy(this.value)" type="button" value="{{ row['symbol'] }}">Buy</button>
+                                <button class="btn btn-primary" name="sell" onclick="sell(this.value)" type="button" value="{{ row['symbol'] }}">Sell</button>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+            <tr>
+                <td colspan="4">CASH</td>
+                <td colspan="2">{{ cashValue }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+
+        /* JavaScript functions used to allow the user to buy/sell shares from the index page.
+            This kind of worked but couldn't get it to go to /buy and /sell via post correctly.
+            It updated the database for the most part but would not redirect the user to "/"
+            (and sometimes it didn't update the database). */
+
+        function buy(val) {
+
+            var shares = prompt("Please enter a number");
+            if(isNaN(shares)) {
+                 shares = prompt("A number is required.");
+                 shares = +shares;
+            }
+            else if (shares % 1 != 0) {
+                 shares = prompt("Please do not enter a decimal number.");
+                 shares = +shares;
+            }
+            else {
+                shares = +shares;
+                var symbol = val;
+                $.post('/buy', { shares: shares, symbol: symbol });
+            }
+        }
+
+        function sell(val) {
+
+            var shares = prompt("Please enter a number");
+            if(isNaN(shares)) {
+                 shares = prompt("A number is required.");
+                 shares = +shares;
+            }
+            else if (shares % 1 != 0) {
+                 shares = prompt("Please do not enter a decimal number.");
+                 shares = +shares;
+            }
+            else {
+                shares = +shares;
+                var symbol = val;
+                $.post('/sell', { shares: shares, symbol: symbol });
+            }
+        }
+
+    </script>
+{% endblock %}

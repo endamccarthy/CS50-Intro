@@ -1,0 +1,107 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <h1 style="color: #d44f4f;">Blogandstocks</h1>
+    <br>
+    <article class="media content-section" style="background-color: #e4ebf1;">
+        <div class="media-body">
+            <h2>About me</h2>
+            <p>My name is Enda McCarthy and I created and designed this website in April 2019.</p>
+            <p>The purpose of the site was to teach myself some basic fundamentals of web development.</p>
+            <a href="https://www.linkedin.com/in/endamccarthy/">My LinkedIn</a>
+            <br>
+            <a href="https://github.com/endamccarthy">My Github</a>
+            <br>
+            <br>
+            <h2>About the Site</h2>
+            <p>This site incorporates two different elements:</p>
+            <ul>
+                <li>A blog</li>
+                <li>A mock trading site for stocks</li>
+            </ul>
+            <p>(not exactly a much sought after combination I know but as stated above the purpose was purely for my own learning.)</p>
+            <br>
+            <h2>Sources</h2>
+            <p>I used a number of different sources to help me build it, the following being of the most help:</p>
+            <ul>
+                <li><a href="https://online-learning.harvard.edu/course/cs50-introduction-computer-science">Harvard's CS50: Intro to Computer Science</a></li>
+                <li><a href="https://www.youtube.com/playlist?list=PL-osiE80TeTs4UjLw5MM6OjgkjFeUxCYH">Corey Schafer's YouTube: Flask Tutorials</a></li>
+                <li><a href="https://www.youtube.com/channel/UC-QDfvrRIDB6F0bIO4I4HkQ">Pretty Printed's Youtube: Flask SQLAlchemy, Flask Admin</a></li>
+            </ul>
+            <p>Along with numerous Google searches and Stack Overflow posts.</p>
+            <br>
+            <h2>Functionality</h2>
+            <h5><span style="color: #d44f4f;">Visual Studio Code</span></h5>
+            <p>I originally created the trading site application as part of a problem set in CS50, this was done within CS50's own IDE.</p>
+            <p>It was written in Python 3 and used the Flask framework. The database structure used was SQLite.</p>
+            <p>
+                I then setup Visual Studio Code and set about transferring over the application. After this I created a blog website and then 
+                combined both and added extra functionalities.
+            </p>
+            <h5><span style="color: #d44f4f;">Virtual Environment</span></h5>
+            <p>I used <em>venv</em>, which is a built-in virtual environment for Python 3.</p>
+            <h5><span style="color: #d44f4f;">Database</span></h5>
+            <p>
+                The database structure I used was SQLAlchemy (as opposed to SQLite in my original app). I built a database from scratch with 
+                User and Post tables using tutorials and then modified them to suit what I needed. I created a transaction table to keep 
+                track of the bought and sold shares.
+            </p>
+            <h5><span style="color: #d44f4f;">User Setup</span></h5>
+            <p>
+                There is a registration page and a login page for the site. I used Flask Login to handle users. I added a forgot password 
+                function whereby the user is emailed a link to reset their password. I used environment variables saved locally on my system
+                 in place of the email address and password used to send the password reset email (a secret key and database URI are also 
+                 saved this way).
+            </p>
+            <p>The user will be notified if the account info is not valid when registering or logging in.</p>
+            <p>The user can also change their account info and password in the Account tab.</p>
+            <h5><span style="color: #d44f4f;">Flask Admin</span></h5>
+            <br>
+            <img src="{{ url_for('static', filename='site_pics/main_link.png') }}" class="img-fluid" alt="Responsive image">
+            <br>
+            <br>
+            <p>
+                In order to have administration rights for the site I used Flask Admin. This allows the administrators to access the users 
+                and posts tables via the user interface (tab in the navbar when logged in as 'admin', see above clip) and edit/delete entries 
+                as they wish. I did not allow access to the transaction table as this should not be accessible to anyone.
+            </p>
+            <img src="{{ url_for('static', filename='site_pics/post_admin.png') }}" class="img-fluid" alt="Responsive image">
+            <br>
+            <br>
+            <p>
+                There is a role column in the user table which is set to default as 'user'. I set my own role to 'admin', only an admin can 
+                access the user table in the Admin interface and change the role of a user.
+            </p>
+            <img src="{{ url_for('static', filename='site_pics/user_admin.png') }}" class="img-fluid" alt="Responsive image">
+            <br>
+            <br>
+            <p>I created a link within the Admin interface to direct back to the main website.</p>
+            <h5><span style="color: #d44f4f;">Blueprints</span></h5>
+            <p>I separated out some of the different functionalities into 4 blueprints:</p>
+            <ol>
+                <li>Main</li>
+                <li>User</li>
+                <li>Posts</li>
+                <li>Finance</li>
+            </ol>
+            <p>Although this project is relatively small this is good practice as large projects could get very messy.</p>
+            <h5><span style="color: #d44f4f;">Error Pages</span></h5>
+            <p>Customised error pages are included which will indicate the potential problem based on what the user was trying to do.</p>
+            <h5><span style="color: #d44f4f;">Search Bar</span></h5>
+            <p>
+                I added a search bar for the blog section of the website. This searches the title and content of each post and displays the 
+                relevant post on a results page. This was created using Flask Whoosh.
+            </p>
+            <h5><span style="color: #d44f4f;">Application Initialisation</span></h5>
+            <p>
+                In order to create the application I set up a function called create_app. This function is called on once the program is ran. 
+                The configuration settings are saved to a class in a different .py file and this is passed into the create_app function.
+            </p>
+            <h5><span style="color: #d44f4f;">Hosting</span></h5>
+            <p>
+                The website is hosted using a Linode server. I choose the option with the lowest available memory as this was the cheapest and 
+                the site requires very little memory. I did not purchase a domain name as there is no need.
+            </p>
+        </div>
+    </article>
+{% endblock content %}

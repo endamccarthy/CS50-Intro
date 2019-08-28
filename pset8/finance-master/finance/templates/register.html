@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block main %}
+    <form action="/register" method="post" name="register">
+        <div class="form-group">
+            <input autocomplete="off" autofocus class="form-control" name="username" placeholder="Username" type="text">
+        </div>
+        <div class="form-group">
+            <input class="form-control" name="password" placeholder="Password" type="password">
+        </div>
+        <div class="form-group">
+            <input class="form-control" name="confirmation" placeholder="Password (again)" type="password">
+        </div>
+        <button class="btn btn-primary" type="submit">Register</button>
+    </form>
+
+    <script>
+
+        /* JavaScript function used to ensure username is filled out and not already in use. This is called when the form is
+        attempting to submit.*/
+
+        var myForm = document.querySelector('form');
+
+        myForm.onsubmit = function() {
+
+            var username = $("input[name=username]").val();
+            event.preventDefault();
+
+            // sends a GET request to /check using AJAX function and passes in the username as an argument
+            $.get('/check?username=' + username, function(data) {
+
+                if (data == true) {
+                    myForm.submit();
+                }
+                else {
+                    alert('Username taken!');
+                }
+            });
+        };
+
+    </script>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Deposit
+{% endblock %}
+
+{% block main %}
+    <form action="/deposit" method="post">
+        <div class="form-group">
+            <input autocomplete="off" autofocus class="form-control" min="0.01" name="deposit" placeholder="Amount ($)" type="float">
+        </div>
+        <button class="btn btn-primary" type="submit">Make Deposit</button>
+    </form>
+{% endblock %}

@@ -1,0 +1,96 @@
+.header
+{
+    background-color: darkgrey;
+    font-family:courier;
+}
+
+body
+{
+    background-color:lightgrey;
+}
+
+h1, h2, h3, h4, h5, h6
+{
+    font-family:courier;
+}
+
+p
+{
+    font-family:arial;
+}
+
+table
+{
+    border: 3px solid darkgrey;
+}
+
+td
+{
+    width: 30px;
+    border: 1px solid darkgrey;
+}
+
+th
+{
+    width: 100px;
+}
+
+.fa
+{
+  padding: 8px;
+  font-size: 50px;
+  width: 75px;
+  text-align: center;
+  text-decoration: none;
+  color: white;
+}
+
+.fa:hover {
+  opacity: 0.5;
+}
+
+.fa-github {
+  background: #333000;
+}
+
+.fa-linkedin {
+  background: #007bb5;
+}
+
+.fa-envelope {
+  background: #FF3333;
+}
+
+/* Make sure that padding behaves as expected */
+* {box-sizing:border-box}
+
+/* Container for skill bars */
+.container {
+  width: 60%; /* Full width */
+  background-color: lightgrey; /* Grey background */
+  display: inline-block;
+}
+
+.skills {
+  text-align: right; /* Right-align text */
+  padding: 3px; /* Add some padding */
+  color: white; /* White text color */
+}
+
+.html {width: 10%; background-color: #FF3333;}
+.css {width: 10%; background-color: #FF3333;}
+.js {width: 10%; background-color: #FF3333;}
+.c {width: 30%; background-color: #FF9933;}
+.swift {width: 20%; background-color: #FF6633;}
+
+.left {text-align: left;}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: darkgrey;
+  color: white;
+  text-align: center;
+}

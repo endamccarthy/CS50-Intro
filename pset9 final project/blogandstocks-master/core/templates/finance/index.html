@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <table class="table table-striped" style="background-color: #d0eebc;">
+        <col width="100">
+        <col width="130">
+        <col width="100">
+        <col width="110">
+        <col width="130">
+        <thead>
+            <tr>
+                <th>Symbol</th>
+                <th>Name</th>
+                <th>Shares</th>
+                <th>Price</th>
+                <th>TOTAL</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <td colspan="4"></td>
+                <td><b>{{ grandTotal }}</b></td>
+            </tr>
+        </tfoot>
+        <tbody>
+            {% for row in rows %}
+                <tr>
+                    <td>{{ row[0] }}</td>
+                    <td>{{ row[2] }}</td>
+                    <td>{{ row[1] }}</td>
+                    <td>{{ row[3] }}</td>
+                    <td>{{ row[4] }}</td>
+                </tr>
+            {% endfor %}
+            <tr>
+                <td colspan="4">CASH</td>
+                <td>{{ balance }}</td>
+            </tr>
+        </tbody>
+    </table>
+{% endblock content %}

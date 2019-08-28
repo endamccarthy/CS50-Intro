@@ -1,0 +1,137 @@
+{% extends "layout.html" %}
+
+{% block main %}
+
+    <!-- http://getbootstrap.com/docs/4.1/content/typography/ -->
+    <h1 class="mb-3">Form</h1>
+
+    <!-- http://getbootstrap.com/docs/4.1/components/forms/ -->
+    <form action="/form" method="post" name="survey" onsubmit="return validateForm()">
+
+        <!-- Name text inputs -->
+        <div class="form-group">
+            <input type="text" class="form-control" name="firstName" placeholder="First Name" autocomplete="off" autofocus>
+            <p id="noFirstName" class="error"></p>
+            <input type="text" class="form-control" name="lastName" placeholder="Last Name" autocomplete="off">
+            <p id="noLastName" class="error"></p>
+        </div>
+
+        <!-- Grade select menu -->
+        <div class="form-group">
+            <select class="form-control" name="grade">
+                <option selected disabled>Grade</option>
+                <option>Senior</option>
+                <option>Intermediate</option>
+                <option>Junior A</option>
+                <option>Junior B</option>
+            </select>
+            <p id="noGrade" class="error"></p>
+        </div>
+
+        <!-- Position radio buttons -->
+        <div class="form-group">
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="position" id="goalkeeper" value="Goalkeeper">
+                <label class="form-check-label" for="goalkeeper">
+                    Goalkeeper
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="position" id="fullBackLine" value="Full Back Line">
+                <label class="form-check-label" for="fullBackLine">
+                    Full Back Line
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="position" id="halfBackLine" value="Half Back Line">
+                <label class="form-check-label" for="halfBackLine">
+                    Half Back Line
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="position" id="midfield" value="Midfield">
+                <label class="form-check-label" for="midfield">
+                    Midfield
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="position" id="halfForwardLine" value="Half Forward Line">
+                <label class="form-check-label" for="halfForwardLine">
+                    Half Forward Line
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="position" id="fullForwardLine" value="Full Forward Line">
+                <label class="form-check-label" for="fullForwardLine">
+                    Full Forward Line
+                </label>
+            </div>
+            <p id="noPosition" class="error"></p>
+        </div>
+
+        <!-- Email input -->
+        <div class="form-group">
+            <input type="email" class="form-control" name="email" aria-describedby="emailHelp" placeholder="Enter email address">
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            <p id="noEmail" class="error"></p>
+        </div>
+
+        <!-- http://getbootstrap.com/docs/4.1/components/buttons/ -->
+        <button class="btn btn-primary" type="submit">Submit</button>
+
+    </form>
+
+    <script>
+
+        // JavaScript function used to ensure all fields are filled out. This is called when the form is
+        // attempting to submit.
+        function validateForm() {
+            var v = document.forms["survey"]["email"].value;
+            var w = document.forms["survey"]["firstName"].value;
+            var x = document.forms["survey"]["lastName"].value;
+            var y = document.forms["survey"]["grade"].value;
+            var z = document.forms["survey"]["position"].value;
+
+            if (v == "") {
+                document.getElementById("noEmail").innerHTML = "Please enter email address";
+            }
+            else {
+                document.getElementById("noFirstName").innerHTML = "";
+            }
+
+            if (w == "") {
+                document.getElementById("noFirstName").innerHTML = "Please enter first name";
+            }
+            else {
+                document.getElementById("noFirstName").innerHTML = "";
+            }
+
+            if (x == "") {
+                document.getElementById("noLastName").innerHTML = "Please enter last name";
+            }
+            else {
+                document.getElementById("noLastName").innerHTML = "";
+            }
+
+            if (y == "Grade" || y == "") {
+                document.getElementById("noGrade").innerHTML = "Grade must be selected";
+            }
+            else {
+                document.getElementById("noGrade").innerHTML = "";
+            }
+
+            if (z == "") {
+                document.getElementById("noPosition").innerHTML = "Position must be selected";
+            }
+            else {
+                document.getElementById("noPosition").innerHTML = "";
+            }
+
+            if (v == "" || w == "" || x == "" || y == "" || y == "Grade" || z == "") {
+                return false;
+            }
+        }
+
+    </script>
+
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    {% for post in posts %}
+    <article class="media content-section" style="background-color: #e4ebf1;">
+        <img class="rounded-circle article-img" src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}">
+        <div class="media-body">
+            <div class="article-metadata">
+                <a class="mr-2" href="{{ url_for('users.user_posts', username=post.author.username) }}">{{ post.author.username }}</a>
+                <small class="text-muted">{{ post.date_posted.strftime('%Y-%m-%d') }}</small>
+            </div>
+            <h2><a class="article-title text-break" href="{{ url_for('posts.post', post_id=post.id) }}">{{ post.title }}</a></h2>
+            <p class="article-content text-break">{{ post.content }}</p>
+        </div>
+    </article>
+    {% endfor %}
+{% endblock content %}
+
+{% block search %}
+    <div class="content-section" style="background-color: #e4ebf1;">
+        <form method="GET" action="search">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">{{ legend }}</legend>
+                <div class="form-group">
+                    <h3>{{ form.query.label(class="form-control-label") }}</h3>
+                    {% if form.query.errors %}
+                        {{ form.query(class="form-control form-control-lg is-invalid")}}
+                        <div class="invalid-feedback">
+                            {% for error in form.query.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.query(class="form-control form-control-lg text-break") }}
+                    {% endif %}
+                </div>
+            </fieldset>
+            <div class="form-group">
+                {{ form.submit(class="btn btn-outline-secondary") }}
+            </div>
+        </form>
+    </div>
+{% endblock search %}

@@ -1,0 +1,10 @@
+
+.form-control {
+    display: inline-block;
+    width: auto;
+}
+
+.error {
+    color: red;
+    font-size: 11px;
+}
